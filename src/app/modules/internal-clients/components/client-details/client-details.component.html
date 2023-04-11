@@ -1,1 +1,6 @@
-<p>client-details works!</p>
+<div *ngIf="client">
+  <h2>{{ client.name.first }} {{ client.name.last }}</h2>
+  <p>Email: {{ client.email }}</p>
+  <p>Phone: {{ client.phone }}</p>
+  <button (click)="goBack()">Back</button>
+</div>

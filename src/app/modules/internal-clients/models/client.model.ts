@@ -1,57 +1,57 @@
 export interface Client {
-  cell: string;
-  dob: {
-    age: string;
-    date: string;
+  cell?: string;
+  dob?: {
+    age?: string;
+    date?: string;
   };
 
-  email: string;
-  gender: string;
+  email?: string;
+  gender?: string;
   id: {
-    name: string;
     value: string;
+    name?: string;
   };
-  location: {
-    city: string;
-    coordinates: {
-      latitude: string;
-      longitude: string;
+  location?: {
+    city?: string;
+    coordinates?: {
+      latitude?: string;
+      longitude?: string;
     };
-    country: string;
-    postcode: string;
-    state: string;
-    street: {
-      number: string;
-      name: string;
+    country?: string;
+    postcode?: string;
+    state?: string;
+    street?: {
+      number?: string;
+      name?: string;
     };
-    timezone: {
-      description: string;
-      offset: string;
+    timezone?: {
+      description?: string;
+      offset?: string;
     };
   };
-  login: {
-    md5: string;
-    password: string;
-    salt: string;
-    sha1: string;
-    sha256: string;
-    username: string;
-    uuid: string;
+  login?: {
+    md5?: string;
+    password?: string;
+    salt?: string;
+    sha1?: string;
+    sha256?: string;
+    username?: string;
+    uuid?: string;
   };
   name: {
-    first: string;
-    last: string;
-    title: string;
+    first?: string;
+    last?: string;
+    title?: string;
   };
-  nat: string;
-  phone: string;
-  picture: {
-    large: string;
-    medium: string;
-    thumbnail: string;
+  nat?: string;
+  phone?: string;
+  picture?: {
+    large?: string;
+    medium?: string;
+    thumbnail?: string;
   };
-  registered: {
-    age: string;
-    date: string;
+  registered?: {
+    age?: string;
+    date?: string;
   };
 }
