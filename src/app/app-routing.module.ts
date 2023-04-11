@@ -1,10 +1,24 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { NgModule } from '@angular/core';
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'internal-clients',
+    pathMatch: 'full',
+  },
+  {
+    path: 'internal-clients',
+    loadChildren: () =>
+      import('./modules/internal-clients/internal-clients.module').then(
+        (m) => m.InternalClientsModule
+      ),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

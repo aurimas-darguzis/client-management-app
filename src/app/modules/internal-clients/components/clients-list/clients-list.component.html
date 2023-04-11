@@ -1,0 +1,5 @@
+<div *ngFor="let client of clients">
+  <a routerLink="/internal-clients/{{ client.id.value }}"
+    >{{ client.name.first }} {{ client.name.last }}</a
+  >
+</div>
