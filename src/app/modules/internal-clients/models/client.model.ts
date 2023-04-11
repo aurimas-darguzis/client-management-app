@@ -29,14 +29,14 @@ export interface Client {
       offset?: string;
     };
   };
-  login?: {
+  login: {
     md5?: string;
     password?: string;
     salt?: string;
     sha1?: string;
     sha256?: string;
     username?: string;
-    uuid?: string;
+    uuid: string;
   };
   name: {
     first?: string;

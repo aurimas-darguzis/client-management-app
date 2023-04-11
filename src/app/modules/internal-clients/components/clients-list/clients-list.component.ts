@@ -45,8 +45,7 @@ export class ClientsListComponent {
   }
 
   onSelectClient(clientId: string) {
-    const client = this.clients.find((c) => c.id.value === clientId);
-    console.log({ client });
+    const client = this.clients.find((c) => c.login.uuid === clientId);
     if (client) {
       this.clientService.selectedClient = client;
       this.router.navigate(['/internal-clients', clientId]);
@@ -63,7 +62,7 @@ export class ClientsListComponent {
   }
 
   onClientRowClick(client: Client) {
-    console.log(client.id.value);
-    this.onSelectClient(client.id.value);
+    const clientId = client.login.uuid;
+    this.onSelectClient(clientId);
   }
 }

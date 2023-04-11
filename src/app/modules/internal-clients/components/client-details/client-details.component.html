@@ -1,6 +1,19 @@
-<div *ngIf="client">
-  <h2>{{ client.name.first }} {{ client.name.last }}</h2>
-  <p>Email: {{ client.email }}</p>
-  <p>Phone: {{ client.phone }}</p>
-  <button (click)="goBack()">Back</button>
+<div class="container">
+  <div *ngIf="client" class="client-details">
+    <img
+      [src]="client.picture?.large"
+      [alt]="client.name.first"
+      class="client-avatar"
+    />
+    <h2>{{ client.name.first }} {{ client.name.last }}</h2>
+    <p>Email: {{ client.email }}</p>
+    <p>Phone: {{ client.phone }}</p>
+    <p>
+      Address: {{ client.location?.street?.number }}
+      {{ client.location?.street?.name }}, {{ client.location?.city }},
+      {{ client.location?.state }}, {{ client.location?.country }}
+    </p>
+    <p>Registered Since: {{ client.registered?.date | date }}</p>
+    <button (click)="goBack()" class="back-button">Back</button>
+  </div>
 </div>

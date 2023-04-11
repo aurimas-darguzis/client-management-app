@@ -20,7 +20,7 @@ export class ClientDetailsComponent {
     const clientId = this.route.snapshot.paramMap.get('clientId');
     if (clientId) {
       const client = this.clientService.clients.find(
-        (c) => c.id.value === clientId
+        (c) => c.login.uuid === clientId
       );
       if (client) {
         this.client = client;
