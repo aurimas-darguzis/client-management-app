@@ -1,6 +1,10 @@
+import { Component, ViewChild } from '@angular/core';
+
 import { Client } from '../../models/client.model';
 import { ClientService } from '../../services/client.service';
-import { Component } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,16 +13,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./clients-list.component.css'],
 })
 export class ClientsListComponent {
+  displayedColumns: string[] = ['name', 'email', 'phone', 'registered'];
+  dataSource: MatTableDataSource<Client>;
   clients: Client[] = [];
+  pageSizeOptions = [5, 10, 20];
+  pageSize = 5;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private clientService: ClientService, private router: Router) {
+    this.dataSource = new MatTableDataSource<Client>([]);
     this.clients = this.clientService.clients;
   }
 
   ngOnInit(): void {
     this.clientService.clients$.subscribe((clients) => {
       this.clients = clients;
+      this.dataSource.data = clients;
     });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   onSelectClient(clientId: string) {
@@ -26,6 +44,15 @@ export class ClientsListComponent {
     if (client) {
       this.clientService.selectedClient = client;
       this.router.navigate(['/client', clientId]);
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 }

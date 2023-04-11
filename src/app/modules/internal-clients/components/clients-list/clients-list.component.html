@@ -1,5 +1,49 @@
-<div *ngFor="let client of clients">
-  <a routerLink="/internal-clients/{{ client.id.value }}"
-    >{{ client.name.first }} {{ client.name.last }}</a
-  >
+<div class="container">
+  <!-- Filter -->
+  <mat-form-field class="filter">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Mia"
+      #input
+    />
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Column definitions -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let client"
+        >{{ client.name.first }} {{ client.name.last }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let client">{{ client.email }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+      <mat-cell *matCellDef="let client">{{ client.phone }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="registered">
+      <mat-header-cell *matHeaderCellDef>Registered since</mat-header-cell>
+      <mat-cell *matCellDef="let client">{{
+        client.registered.date | date
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Table rows -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let client; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

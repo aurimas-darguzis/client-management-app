@@ -1,11 +1,4 @@
-import {
-  BehaviorSubject,
-  Observable,
-  map,
-  of,
-  switchMap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Client } from '../models/client.model';
 import { HttpClient } from '@angular/common/http';
