@@ -13,11 +13,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./clients-list.component.css'],
 })
 export class ClientsListComponent {
-  displayedColumns: string[] = ['name', 'email', 'phone', 'registered'];
+  displayedColumns: string[] = [
+    'client',
+    'name',
+    'email',
+    'phone',
+    'registered',
+  ];
   dataSource: MatTableDataSource<Client>;
   clients: Client[] = [];
   pageSizeOptions = [5, 10, 20];
-  pageSize = 5;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,9 +46,10 @@ export class ClientsListComponent {
 
   onSelectClient(clientId: string) {
     const client = this.clients.find((c) => c.id.value === clientId);
+    console.log({ client });
     if (client) {
       this.clientService.selectedClient = client;
-      this.router.navigate(['/client', clientId]);
+      this.router.navigate(['/internal-clients', clientId]);
     }
   }
 
@@ -54,5 +60,10 @@ export class ClientsListComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onClientRowClick(client: Client) {
+    console.log(client.id.value);
+    this.onSelectClient(client.id.value);
   }
 }

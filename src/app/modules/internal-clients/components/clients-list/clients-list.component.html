@@ -1,4 +1,5 @@
 <div class="container">
+  <h1>Internal clients</h1>
   <!-- Filter -->
   <mat-form-field class="filter">
     <mat-label>Filter</mat-label>
@@ -12,6 +13,18 @@
 
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Column definitions -->
+    <ng-container matColumnDef="client">
+      <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        <img
+          matListAvatar
+          [src]="client.picture.thumbnail"
+          [alt]="client.name.first"
+          class="avatar"
+        />
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let client"
@@ -38,12 +51,16 @@
 
     <!-- Table rows -->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let client; columns: displayedColumns"></mat-row>
+    <mat-row
+      *matRowDef="let client; columns: displayedColumns"
+      (click)="onClientRowClick(client)"
+    ></mat-row>
   </mat-table>
 
   <!-- Pagination -->
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
+    [pageSize]="10"
   ></mat-paginator>
 </div>
