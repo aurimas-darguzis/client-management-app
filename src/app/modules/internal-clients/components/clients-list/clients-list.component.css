@@ -18,17 +18,18 @@ h1 {
   box-shadow: 2px 2px hsla(0,0%,53%,.5);
 }
 
-
+.mat-mdc-table {
+  margin-bottom: 16px;
+}
 
 .mat-mdc-row .mat-mdc-cell {
-  /* border-bottom: 1px solid transparent; */
   border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
   cursor: pointer;
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
   border-color: #e60073;
-  /* background-color: #e60073; */
   
 }
 
