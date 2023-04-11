@@ -29,7 +29,6 @@ export class ClientsListComponent {
 
   constructor(private clientService: ClientService, private router: Router) {
     this.dataSource = new MatTableDataSource<Client>([]);
-    this.clients = this.clientService.clients;
   }
 
   ngOnInit(): void {

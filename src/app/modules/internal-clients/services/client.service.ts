@@ -4,6 +4,7 @@ import { Client } from '../models/client.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +15,15 @@ export class ClientService {
   private selectedClient$ = new BehaviorSubject<Client | null>(null);
 
   constructor(private http: HttpClient) {
-    this.getClients().subscribe((clients) => {
-      this.clients$.next(clients.results);
-    });
+    this.loadClients();
+  }
+
+  public loadClients(): void {
+    this.getClients()
+      .pipe(take(1))
+      .subscribe((clients) => {
+        this.clients$.next(clients.results);
+      });
   }
 
   getClients(): Observable<{ results: Client[] }> {

@@ -6,10 +6,17 @@ import {
 import { Client } from '../models/client.model';
 import { ClientService } from './client.service';
 import { TestBed } from '@angular/core/testing';
+import { mockResponse } from 'src/app/mocks/mock-responses';
+import { take } from 'rxjs';
 
 describe('ClientService', () => {
   let service: ClientService;
   let httpMock: HttpTestingController;
+
+  function handleInitialRequest() {
+    const req = httpMock.expectOne(service['apiUrl']);
+    req.flush(mockResponse);
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,6 +26,8 @@ describe('ClientService', () => {
 
     service = TestBed.inject(ClientService);
     httpMock = TestBed.inject(HttpTestingController);
+
+    handleInitialRequest();
   });
 
   afterEach(() => {
@@ -29,39 +38,10 @@ describe('ClientService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve clients from API', () => {
-    const mockResponse: { results: Client[] } = {
-      results: [
-        {
-          id: {
-            value: '1',
-          },
-          name: {
-            title: 'Mr',
-            first: 'John',
-            last: 'Doe',
-          },
-        },
-        {
-          id: {
-            value: '2',
-          },
-          name: {
-            title: 'Mrs',
-            first: 'Jane',
-            last: 'Doe',
-          },
-        },
-      ],
-    };
-
-    service.getClients().subscribe((clients) => {
-      expect(clients.results.length).toBe(2);
-      expect(clients).toEqual(mockResponse);
+  it('should retrieve clients from API and update clients$ BehaviorSubject', () => {
+    service.clients$.pipe(take(1)).subscribe((clients) => {
+      expect(clients.length).toBe(2);
+      expect(clients).toEqual(mockResponse.results);
     });
-
-    const req = httpMock.expectOne(service['apiUrl']);
-    expect(req.request.method).toBe('GET');
-    req.flush(mockResponse);
   });
 });
