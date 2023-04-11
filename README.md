@@ -1,27 +1,45 @@
-# ClientManagementApp
+# Client Management App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
+This project is a simple client management app built with the latest version of Angular. The app allows staff to view and manage internal clients through a user-friendly interface. The project demonstrates a scalable architecture suitable for large enterprise-sized applications.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Fetches clients from the API (https://randomuser.me/api/?results=20&page=1)
+- Displays clients in a paginated list with relevant details
+- Provides a search box to filter the client list
+- Navigates to a "details" view upon clicking a client, showing additional information
+- Includes basic unit tests demonstrating Angular testing concepts and best practices
 
-## Code scaffolding
+## Requirements
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The app is:
 
-## Build
+1. Presentable with a clean and modern UI
+2. Optimized for performance
+3. Developed with a strong understanding of Angular concepts and best practices
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instructions
 
-## Running unit tests
+1. Clone the GitHub repository to your local machine
+2. Navigate to the project directory
+3. Run `npm install` to install the necessary dependencies
+4. Run `ng serve` to start a local development server
+5. Open your browser and navigate to http://localhost:4200/
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Development Process
 
-## Running end-to-end tests
+1. Scaffolded app with Angular CLI
+2. Created internal-clients module as a feature module
+3. Created internal-clients-routing module to handle routing for the feature module
+4. Created internal-clients service to handle API calls
+5. Used service to store selected client in a BehaviorSubject, so that client-detail component can subscribe to it.
+6. Installed Angular Material to display table data.
+7. Pagination and table rows are implemented by material library.
+8. NOT IMPLEMENTED: Update url params to get next page of data and amount of rows to display.
+9. Implemented search functionality by filtering the data in the table.
+10. Implemented client detail view with CSS.
+11. Created unit tests for the internal-clients service and the internal-clients component.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Time Limit
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The project was completed within a maximum time limit of 4 hours. It took another ~2 hours to read angular docs and remember main concepts.
